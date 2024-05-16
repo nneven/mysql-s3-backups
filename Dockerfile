@@ -12,7 +12,7 @@ RUN npm ci && \
     npm run build && \
     npm prune --production
 
-FROM node:latest
+FROM node:lts-alpine
 
 WORKDIR /app
 
