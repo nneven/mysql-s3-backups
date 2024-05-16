@@ -20,9 +20,7 @@ COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/package.json ./
 
-RUN apk add --update --no-cache mariadb-client
+RUN apk add --update --no-cache mysql-client
 RUN apk add --update --no-cache mariadb-connector-c
 
-CMD mysqladmin ping -h $DATABASE_HOST -P $DATABASE_PORT -u $DATABASE_USER -p$DATABASE_PASSWORD && \
-    mysqldump --version && \
-    node dist/index.js
+CMD node dist/index.js
