@@ -1,4 +1,4 @@
-FROM node:lts AS build
+FROM node:20.11.1-alpine AS build
 
 ENV NPM_CONFIG_UPDATE_NOTIFIER=false
 ENV NPM_CONFIG_FUND=false
@@ -12,7 +12,7 @@ RUN npm ci && \
     npm run build && \
     npm prune --production
 
-FROM node:lts
+FROM node:20.11.1-alpine
 
 WORKDIR /app
 
@@ -20,8 +20,8 @@ COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/package.json ./
 
-RUN apt-get update && \
-    apt-get install -y mysql-client
+RUN apk add --update --no-cache mariadb-client
+RUN apk add --update --no-cache mariadb-connector-c
 
 CMD mysqladmin ping -h $DATABASE_HOST -P $DATABASE_PORT -u $DATABASE_USER -p$DATABASE_PASSWORD && \
     mysqldump --version && \
