@@ -44,7 +44,7 @@ const dumpToFile = async (filePath: string) => {
   console.log("Dumping DB to file...");
 
   await new Promise((resolve, reject) => {
-    exec(`mysqldump --user=${env.DB_USER} --password=${env.DB_PASSWORD} --host=${env.DB_HOST} | gzip > ${filePath}`, (error, stdout, stderr) => {
+    exec(`mysqldump --user=${env.DATABASE_USER} --password=${env.DATABASE_PASSWORD} --host=${env.DATABASE_HOST} | gzip > ${filePath}`, (error, stdout, stderr) => {
       if (error) {
         reject({ error: error, stderr: stderr.trimEnd() });
         return;

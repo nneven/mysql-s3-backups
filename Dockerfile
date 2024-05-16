@@ -22,6 +22,6 @@ COPY --from=build /app/package.json ./
 
 RUN apk add --update --no-cache mysql-client
 
-CMD mysqladmin ping -h $DB_HOST -u $DB_USER --password=$DB_PASSWORD && \
+CMD mysqladmin ping -h $DATABASE_HOST -u $DATABASE_USER --password=$DATABASE_PASSWORD && \
     mysqldump --version && \
     node dist/index.js

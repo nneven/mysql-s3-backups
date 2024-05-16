@@ -5,13 +5,13 @@ export const env = envsafe({
   AWS_SECRET_ACCESS_KEY: str(),
   AWS_S3_BUCKET: str(),
   AWS_S3_REGION: str(),
-  DB_HOST: str({
+  DATABASE_HOST: str({
     desc: 'The host string of the database to backup.'
   }),
-  DB_USER: str({
+  DATABASE_USER: str({
     desc: 'The user string of the database to backup.'
   }),
-  DB_PASSWORD: str({
+  DATABASE_PASSWORD: str({
     desc: 'The password string of the database to backup.'
   }),
   BACKUP_CRON_SCHEDULE: str({
