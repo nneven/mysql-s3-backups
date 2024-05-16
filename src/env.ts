@@ -5,8 +5,14 @@ export const env = envsafe({
   AWS_SECRET_ACCESS_KEY: str(),
   AWS_S3_BUCKET: str(),
   AWS_S3_REGION: str(),
-  BACKUP_DATABASE_URL: str({
-    desc: 'The connection string of the database to backup.'
+  DB_HOST: str({
+    desc: 'The host string of the database to backup.'
+  }),
+  DB_USER: str({
+    desc: 'The user string of the database to backup.'
+  }),
+  DB_PASSWORD: str({
+    desc: 'The password string of the database to backup.'
   }),
   BACKUP_CRON_SCHEDULE: str({
     desc: 'The cron schedule to run the backup on.',
@@ -36,5 +42,5 @@ export const env = envsafe({
     desc: 'Run a single backup on start and exit when completed',
     default: false,
     allowEmpty: true,
-  })
+  }),
 })

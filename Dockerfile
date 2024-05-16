@@ -20,10 +20,8 @@ COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/package.json ./
 
-ARG PG_VERSION='16'
+RUN apk add --update --no-cache mysql-client
 
-RUN apk add --update --no-cache postgresql${PG_VERSION}-client
-
-CMD pg_isready --dbname=$BACKUP_DATABASE_URL && \
-    pg_dump --version && \
+CMD mysqladmin ping -h $DB_HOST -u $DB_USER --password=$DB_PASSWORD && \
+    mysqldump --version && \
     node dist/index.js
